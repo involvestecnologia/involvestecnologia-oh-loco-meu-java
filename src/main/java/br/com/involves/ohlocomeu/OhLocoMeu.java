@@ -63,6 +63,7 @@ public class OhLocoMeu extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		File outputDir = outputDirectory;
+		OutputStream outStream = null;
 
 		if (!outputDir.exists()) {
 			outputDir.mkdirs();
@@ -76,27 +77,33 @@ public class OhLocoMeu extends AbstractMojo {
 					String fileName = String.format("%s%s.%s", namePrefix, locale, type);
 					File target = Paths.get(outputDir.getCanonicalPath(), fileName).toFile();
 
-					long contentLength = conn.getContentLengthLong();
-					OutputStream outStream = new FileOutputStream(target);
+					try {
+						long contentLength = conn.getContentLengthLong();
+						outStream = new FileOutputStream(target);
 
-					byte[] buffer = new byte[8 * 1024];
-					long size = 0;
-					int bytesRead = 0;
+						byte[] buffer = new byte[8 * 1024];
+						long size = 0;
+						int bytesRead = 0;
 
-					while ((bytesRead = conn.getInputStream().read(buffer)) != -1) {
-						outStream.write(buffer, 0, bytesRead);
-						size += bytesRead;
-					}
+						while ((bytesRead = conn.getInputStream().read(buffer)) != -1) {
+							outStream.write(buffer, 0, bytesRead);
+							size += bytesRead;
+						}
 
-					if (size != contentLength) {
+						if (size != contentLength) {
+							outStream.close();
+
+							throw new IOException(
+									String.format(FILE_SIZE_DIFFERS_FROM_INPUT_MESSAGE, size, contentLength));
+						}
+
+						conn.disconnect();
+						outStream.flush();
 						outStream.close();
-
-						throw new IOException(String.format(FILE_SIZE_DIFFERS_FROM_INPUT_MESSAGE, size, contentLength));
+						
+					} finally {
+						outStream.close();
 					}
-
-					conn.disconnect();
-					outStream.flush();
-					outStream.close();
 				}
 			}
 		} catch (MalformedURLException e) {
