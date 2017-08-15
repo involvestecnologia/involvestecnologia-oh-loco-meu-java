@@ -16,7 +16,7 @@
             <goal>i18n</goal>
           </goals>
           <configuration>
-            <outputDir>{$project.build.directory}/i18n/</outputDir>
+            <outputDirectory>{$project.build.directory}/i18n/</outputDirectory>
             <locales>en</locales>
             <types>properties</types>
             <namePrefix>msg_</namePrefix>

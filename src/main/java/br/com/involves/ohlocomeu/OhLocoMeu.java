@@ -24,7 +24,7 @@ public class OhLocoMeu extends AbstractMojo {
 	private static final String FAILED_HTTP_ERROR_CODE_WAS_MESSAGE = "Failed! HTTP error code was %s";
 	private static final String FILE_SIZE_DIFFERS_FROM_INPUT_MESSAGE = "File size (%s) differs from Input size (%s).";
 
-	@Parameter(defaultValue = "${project.build.directory}", property = "outputDir", required = true)
+	@Parameter(defaultValue = "${project.build.directory}", property = "outputDirectory", required = true)
 	private File outputDirectory;
 
 	@Parameter(defaultValue = "en,es,pt", property = "locales", required = true)
