@@ -13,6 +13,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.host.url>https://sonarqube.agilepromoter.com</sonar.host.url>
+		<sonar.login>c762643e78518560ebc5bf435fc015df1efbacba</sonar.login>
 	</properties>
 
 	<dependencies>
