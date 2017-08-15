@@ -102,7 +102,9 @@ public class OhLocoMeu extends AbstractMojo {
 						outStream.close();
 						
 					} finally {
-						outStream.close();
+						if (outStream != null) {
+							outStream.close();
+						}
 					}
 				}
 			}
