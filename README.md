@@ -8,7 +8,7 @@
     <plugin>
       <groupId>br.com.involves</groupId>
       <artifactId>ohlocomeu</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
       <executions>
         <execution>
           <id>en-properties</id>
