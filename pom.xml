@@ -4,7 +4,7 @@
 
 	<groupId>br.com.involves</groupId>
 	<artifactId>ohlocomeu</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Oh Loco, Meu! Maven Plugin</name>
